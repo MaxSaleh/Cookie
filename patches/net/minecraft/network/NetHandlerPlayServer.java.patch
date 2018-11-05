@@ -1874,7 +1874,7 @@
  
          if ("MC|BEdit".equals(p_147349_1_.func_149559_c()))
          {
-@@ -1075,35 +2436,52 @@
+@@ -1075,34 +2436,50 @@
  
              try
              {
@@ -1920,9 +1920,8 @@
 +            // CraftBukkit start
 +            catch (Throwable throwable)
              {
-                 logger.error("Couldn\'t handle book info", exception4);
-                 return;
--            }
+-                logger.error("Couldn\'t handle book info", exception4);
+-                return;
 +                logger.error("Couldn\'t handle book info", throwable);
 +                if (throwable instanceof RuntimeException && !(throwable instanceof IOException))
 +                {
@@ -1933,10 +1932,10 @@
 +                    this.kickPlayerFromServer("Invalid book data!");
 +                }
 +                // CraftBukkit end
+             }
              finally
              {
-                 packetbuffer.release();
-@@ -1117,37 +2495,47 @@
+@@ -1117,37 +2494,47 @@
  
              try
              {
@@ -1997,7 +1996,7 @@
              }
              finally
              {
-@@ -1174,9 +2562,12 @@
+@@ -1174,9 +2561,12 @@
                          ((ContainerMerchant)container).setCurrentRecipeIndex(i);
                      }
                  }
@@ -2011,7 +2010,7 @@
                  }
              }
              else if ("MC|AdvCdm".equals(p_147349_1_.func_149559_c()))
-@@ -1222,9 +2613,12 @@
+@@ -1222,9 +2612,12 @@
                              this.playerEntity.addChatMessage(new ChatComponentTranslation("advMode.setCommand.success", new Object[] {s1}));
                          }
                      }
@@ -2026,7 +2025,7 @@
                      }
                      finally
                      {
-@@ -1257,9 +2651,12 @@
+@@ -1257,9 +2650,12 @@
                              tileentitybeacon.markDirty();
                          }
                      }
@@ -2041,7 +2040,7 @@
                      }
                  }
              }
-@@ -1281,6 +2678,13 @@
+@@ -1281,6 +2677,13 @@
                      containerrepair.updateItemName("");
                  }
              }
@@ -2055,7 +2054,7 @@
          }
      }
  
-@@ -1292,6 +2696,21 @@
+@@ -1292,6 +2695,21 @@
          }
      }
  
