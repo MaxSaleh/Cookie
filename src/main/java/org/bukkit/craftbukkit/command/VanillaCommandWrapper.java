@@ -1,33 +1,33 @@
 package org.bukkit.craftbukkit.command;
 
-import java.util.List;
-
-
+import net.minecraft.command.CommandBase;
 import net.minecraft.entity.EntityMinecartCommandBlockListener;
 import net.minecraft.tileentity.TileEntityCommandBlockListener;
-
+import net.minecraft.world.WorldServer;
 import org.apache.commons.lang.Validate;
 import org.apache.logging.log4j.Level;
 import org.bukkit.command.BlockCommandSender;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.command.RemoteConsoleCommandSender;
-import org.bukkit.command.defaults.*;
+import org.bukkit.command.defaults.VanillaCommand;
 import org.bukkit.craftbukkit.CraftServer;
 import org.bukkit.craftbukkit.entity.CraftMinecartCommand;
 import org.bukkit.craftbukkit.entity.CraftPlayer;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.minecart.CommandMinecart;
 
+import java.util.List;
+
 public final class VanillaCommandWrapper extends VanillaCommand {
     protected final net.minecraft.command.CommandBase vanillaCommand;
 
-    public VanillaCommandWrapper(net.minecraft.command.CommandBase vanillaCommand) {
+    public VanillaCommandWrapper(CommandBase vanillaCommand) {
         super(vanillaCommand.getCommandName());
         this.vanillaCommand = vanillaCommand;
     }
 
-    public VanillaCommandWrapper(net.minecraft.command.CommandBase vanillaCommand, String usage) {
+    public VanillaCommandWrapper(CommandBase vanillaCommand, String usage) {
         super(vanillaCommand.getCommandName());
         this.vanillaCommand = vanillaCommand;
         this.description = "A Mojang provided command.";
@@ -42,7 +42,7 @@ public final class VanillaCommandWrapper extends VanillaCommand {
         net.minecraft.command.ICommandSender icommandlistener = getListener(sender);
         // Some commands use the worldserver variable but we leave it full of null values,
         // so we must temporarily populate it with the world of the commandsender
-        net.minecraft.world.WorldServer[] prev = net.minecraft.server.MinecraftServer.getServer().worldServers;
+        WorldServer[] prev = net.minecraft.server.MinecraftServer.getServer().worldServers;
         net.minecraft.server.MinecraftServer.getServer().worldServers = new net.minecraft.world.WorldServer[]{(net.minecraft.world.WorldServer) icommandlistener.getEntityWorld()};
         try {
             vanillaCommand.processCommand(icommandlistener, args);
@@ -87,15 +87,13 @@ public final class VanillaCommandWrapper extends VanillaCommand {
                 if (i > -1) {
                     net.minecraft.entity.player.EntityPlayerMP aentityplayer[] = net.minecraft.command.PlayerSelector.matchPlayers(icommandlistener, as[i]);
                     String s2 = as[i];
-                    net.minecraft.entity.player.EntityPlayerMP aentityplayer1[] = aentityplayer;
-                    int k = aentityplayer1.length;
+                    int k = aentityplayer.length;
                     for (int l = 0; l < k;) {
-                        net.minecraft.entity.player.EntityPlayerMP entityplayer = aentityplayer1[l];
+                        net.minecraft.entity.player.EntityPlayerMP entityplayer = aentityplayer[l];
                         as[i] = entityplayer.getCommandSenderName();
                         try {
                             vanillaCommand.processCommand(icommandlistener, as);
                             j++;
-                            continue;
                         } catch (net.minecraft.command.CommandException commandexception1) {
                             net.minecraft.util.ChatComponentTranslation chatmessage4 = new net.minecraft.util.ChatComponentTranslation(commandexception1.getMessage(), commandexception1.getErrorOjbects());
                             chatmessage4.getChatStyle().setColor(net.minecraft.util.EnumChatFormatting.RED);

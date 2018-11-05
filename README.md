@@ -26,7 +26,7 @@ You can download the pre-built packages from [here](https://github.com/Cyberdyne
 
 P.S. **PLEASE** look at the release notes before downloading!
 
-##Installing WarmRoast
+## Installing WarmRoast
 [Tutorial Video](https://youtu.be/c0ffjooX7Jw)
 
 But we recommend to use **YourKit Profiler**

@@ -1,18 +1,17 @@
 package org.bukkit.craftbukkit.conversations;
 
-import java.util.LinkedList;
-import java.util.logging.Level;
-
 import org.bukkit.Bukkit;
 import org.bukkit.conversations.Conversation;
 import org.bukkit.conversations.ConversationAbandonedEvent;
 import org.bukkit.conversations.ManuallyAbandonedConversationCanceller;
 
+import java.util.LinkedList;
+import java.util.logging.Level;
+
 /**
  */
 public class ConversationTracker {
-
-    private LinkedList<Conversation> conversationQueue = new LinkedList<Conversation>();
+    private LinkedList<Conversation> conversationQueue = new LinkedList<>();
 
     public synchronized boolean beginConversation(Conversation conversation) {
         if (!conversationQueue.contains(conversation)) {
@@ -43,10 +42,10 @@ public class ConversationTracker {
     public synchronized void abandonAllConversations() {
 
         LinkedList<Conversation> oldQueue = conversationQueue;
-        conversationQueue = new LinkedList<Conversation>();
-        for(Conversation conversation : oldQueue) {
+        conversationQueue = new LinkedList<>();
+        for (Conversation conversation : oldQueue) {
             try {
-            conversation.abandon(new ConversationAbandonedEvent(conversation, new ManuallyAbandonedConversationCanceller()));
+                conversation.abandon(new ConversationAbandonedEvent(conversation, new ManuallyAbandonedConversationCanceller()));
             } catch (Throwable t) {
                 Bukkit.getLogger().log(Level.SEVERE, "Unexpected exception while abandoning a conversation", t);
             }

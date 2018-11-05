@@ -12,3 +12,23 @@ build
 .gradle
 
 *.DS_Store
+/banned-ips.json
+/banned-players.json
+/bukkit.yml
+/cauldron.yml
+/commands.yml
+/config
+/entities.yml
+/help.yml
+/logs
+/mods
+/ops.json
+/permissions.yml
+/plugins
+/server.properties
+/spigot.yml
+/thermos.yml
+/tileentities.yml
+/usercache.json
+/whitelist.json
+/world

@@ -11,12 +11,7 @@ import org.bukkit.craftbukkit.conversations.ConversationTracker;
  * Represents CLI input from a console
  */
 public class CraftConsoleCommandSender extends ServerCommandSender implements ConsoleCommandSender {
-
     protected final ConversationTracker conversationTracker = new ConversationTracker();
-
-    protected CraftConsoleCommandSender() {
-        super();
-    }
 
     public void sendMessage(String message) {
         sendRawMessage(message);
